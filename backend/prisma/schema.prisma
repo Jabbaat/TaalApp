@@ -1,0 +1,62 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id              Int            @id @default(autoincrement())
+  email           String         @unique
+  passwordHash    String
+  name            String?
+  nativeLanguage  String         @default("en")
+  targetLanguage  String         @default("nl")
+  skillLevel      String         @default("beginner") // beginner, intermediate, advanced
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  progress        UserProgress[]
+  vocabulary      Vocabulary[]
+}
+
+model Lesson {
+  id              Int            @id @default(autoincrement())
+  title           String
+  content         String         // JSON content storing lesson structure
+  difficultyLevel String         // beginner, intermediate, advanced
+  createdAt       DateTime       @default(now())
+  updatedAt       DateTime       @updatedAt
+  userProgress    UserProgress[]
+}
+
+model UserProgress {
+  id        Int      @id @default(autoincrement())
+  userId    Int
+  lessonId  Int
+  status    String   // not_started, in_progress, completed
+  score     Int?
+  completedAt DateTime?
+  user      User     @relation(fields: [userId], references: [id])
+  lesson    Lesson   @relation(fields: [lessonId], references: [id])
+
+  @@unique([userId, lessonId])
+}
+
+model Vocabulary {
+  id             Int      @id @default(autoincrement())
+  userId         Int
+  word           String
+  translation    String
+  nextReviewDate DateTime @default(now())
+  interval       Int      @default(1) // in days
+  easeFactor     Float    @default(2.5)
+  consecutiveCorrect Int @default(0)
+  user           User     @relation(fields: [userId], references: [id])
+  
+  @@unique([userId, word])
+}
