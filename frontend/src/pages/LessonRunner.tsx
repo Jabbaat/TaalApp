@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import { API_BASE_URL } from '../config';
 
 interface LessonContent {
     introduction: string;
@@ -30,7 +31,7 @@ const LessonRunner: React.FC = () => {
     useEffect(() => {
         const fetchLesson = async () => {
             try {
-                const response = await fetch(`/api/lessons/${id}`, {
+                const response = await fetch(`${API_BASE_URL}/api/lessons/${id}`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 if (!response.ok) throw new Error('Failed to fetch lesson');

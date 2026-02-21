@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import { API_BASE_URL } from '../config';
 
 interface Vocabulary {
     id: number;
@@ -22,7 +23,7 @@ const Practice = () => {
 
     const fetchReviewItems = async () => {
         try {
-            const response = await fetch('/api/vocabulary/review', {
+            const response = await fetch(`${API_BASE_URL}/api/vocabulary/review`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             if (response.ok) {
@@ -41,7 +42,7 @@ const Practice = () => {
 
         const currentItem = reviewItems[currentIndex];
         try {
-            await fetch(`/api/vocabulary/review/${currentItem.id}`, {
+            await fetch(`${API_BASE_URL}/api/vocabulary/review/${currentItem.id}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

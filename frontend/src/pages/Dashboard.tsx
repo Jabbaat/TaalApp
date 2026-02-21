@@ -3,6 +3,7 @@ import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
 import ProgressChart from '../components/ProgressChart';
+import { API_BASE_URL } from '../config';
 
 interface Lesson {
     id: number;
@@ -25,7 +26,7 @@ const Dashboard = () => {
 
     const fetchLessons = async () => {
         try {
-            const response = await fetch('/api/lessons', {
+            const response = await fetch(`${API_BASE_URL}/api/lessons`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             if (response.ok) {
@@ -41,7 +42,7 @@ const Dashboard = () => {
         setLoading(true);
         setError(null);
         try {
-            const response = await fetch('/api/lessons/generate', {
+            const response = await fetch(`${API_BASE_URL}/api/lessons/generate`, {
                 method: 'POST',
                 headers: { Authorization: `Bearer ${token}` },
             });
