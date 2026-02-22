@@ -7,12 +7,14 @@ const Login = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     const { login } = useAuth();
     const navigate = useNavigate();
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
+        setIsLoading(true);
 
         try {
             const response = await fetch(`${API_BASE_URL}/api/auth/login`, {
@@ -31,6 +33,8 @@ const Login = () => {
             navigate('/dashboard');
         } catch (err: any) {
             setError(err.message);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -62,9 +66,10 @@ const Login = () => {
                     </div>
                     <button
                         type="submit"
-                        className="brutal-btn w-full text-xl"
+                        disabled={isLoading}
+                        className="brutal-btn w-full text-xl disabled:bg-gray-400 disabled:opacity-50"
                     >
-                        SIGN IN
+                        {isLoading ? 'Laden...' : 'SIGN IN'}
                     </button>
                 </form>
                 <p className="mt-6 text-center text-black font-bold">

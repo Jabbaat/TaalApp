@@ -72,9 +72,20 @@ const LessonRunner: React.FC = () => {
     };
 
     const playAudio = (text: string) => {
+        // Map simplified language codes to full BCP 47 tags for accurate pronunciation
+        const languageMap: Record<string, string> = {
+            'nl': 'nl-NL',
+            'sv': 'sv-SE',
+            'fr': 'fr-FR',
+            'it': 'it-IT',
+            'en': 'en-US',
+            'es': 'es-ES'
+        };
+
         if ('speechSynthesis' in window) {
             const utterance = new SpeechSynthesisUtterance(text);
-            utterance.lang = user?.targetLanguage || 'nl';
+            const targetLang = user?.targetLanguage || 'nl';
+            utterance.lang = languageMap[targetLang] || targetLang;
             window.speechSynthesis.speak(utterance);
         } else {
             alert('Text-to-speech is not supported in this browser.');

@@ -12,6 +12,7 @@ const Register = () => {
         skillLevel: 'beginner',
     });
     const [error, setError] = useState('');
+    const [isLoading, setIsLoading] = useState(false);
     const { login } = useAuth();
     const navigate = useNavigate();
 
@@ -22,6 +23,7 @@ const Register = () => {
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         setError('');
+        setIsLoading(true);
 
         try {
             const response = await fetch(`${API_BASE_URL}/api/auth/register`, {
@@ -40,6 +42,8 @@ const Register = () => {
             navigate('/dashboard');
         } catch (err: any) {
             setError(err.message);
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -118,9 +122,10 @@ const Register = () => {
                     </div>
                     <button
                         type="submit"
-                        className="brutal-btn w-full text-xl mt-4"
+                        disabled={isLoading}
+                        className="brutal-btn w-full text-xl mt-4 disabled:bg-gray-400 disabled:opacity-50"
                     >
-                        CREATE ACCOUNT
+                        {isLoading ? 'Laden...' : 'CREATE ACCOUNT'}
                     </button>
                 </form>
                 <p className="mt-6 text-center text-black font-bold">
