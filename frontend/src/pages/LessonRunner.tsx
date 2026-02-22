@@ -85,8 +85,25 @@ const LessonRunner: React.FC = () => {
         if ('speechSynthesis' in window) {
             const utterance = new SpeechSynthesisUtterance(text);
             const targetLang = user?.targetLanguage || 'nl';
-            utterance.lang = languageMap[targetLang] || targetLang;
-            window.speechSynthesis.speak(utterance);
+            const langCode = languageMap[targetLang] || targetLang;
+            utterance.lang = langCode;
+
+            const setVoiceAndSpeak = () => {
+                const voices = window.speechSynthesis.getVoices();
+                // Find a voice that matches the langCode exactly, or at least the base language 
+                const voice = voices.find(v => v.lang === langCode) || voices.find(v => v.lang.startsWith(langCode.split('-')[0]));
+                if (voice) {
+                    utterance.voice = voice;
+                }
+                window.speechSynthesis.speak(utterance);
+            };
+
+            // Voices might not be loaded immediately, add listener if empty
+            if (window.speechSynthesis.getVoices().length === 0) {
+                window.speechSynthesis.addEventListener('voiceschanged', setVoiceAndSpeak, { once: true });
+            } else {
+                setVoiceAndSpeak();
+            }
         } else {
             alert('Text-to-speech is not supported in this browser.');
         }
