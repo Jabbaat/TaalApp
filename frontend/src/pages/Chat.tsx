@@ -58,14 +58,14 @@ const Chat = () => {
     };
 
     return (
-        <div className="flex flex-col h-screen bg-gray-100">
-            <header className="bg-white shadow p-4 flex justify-between items-center">
-                <h1 className="text-xl font-bold text-gray-800">Chat Practice (Dutch)</h1>
+        <div className="flex flex-col h-screen bg-orange-400 font-sans">
+            <header className="bg-yellow-400 border-b-4 border-black p-4 flex justify-between items-center">
+                <h1 className="text-3xl font-black text-black uppercase tracking-wider">Chat Practice (Dutch)</h1>
                 <button
                     onClick={() => navigate('/dashboard')}
-                    className="text-gray-600 hover:text-gray-900"
+                    className="brutal-btn bg-white py-2 px-6 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none"
                 >
-                    Back to Dashboard
+                    BACK
                 </button>
             </header>
 
@@ -76,9 +76,9 @@ const Chat = () => {
                         className={`flex ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                     >
                         <div
-                            className={`max-w-xs md:max-w-md px-4 py-2 rounded-lg ${msg.role === 'user'
-                                ? 'bg-blue-600 text-white rounded-br-none'
-                                : 'bg-white text-gray-800 shadow rounded-bl-none'
+                            className={`max-w-xs md:max-w-xl px-6 py-4 brutal-border text-lg font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] ${msg.role === 'user'
+                                ? 'bg-cyan-300 text-black border-r-8'
+                                : 'bg-white text-black border-l-8'
                                 }`}
                         >
                             {msg.content}
@@ -87,7 +87,7 @@ const Chat = () => {
                 ))}
                 {loading && (
                     <div className="flex justify-start">
-                        <div className="bg-gray-200 text-gray-500 px-4 py-2 rounded-lg rounded-bl-none animate-pulse">
+                        <div className="bg-white text-black px-6 py-4 brutal-border shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] font-black uppercase animate-pulse">
                             Typing...
                         </div>
                     </div>
@@ -95,21 +95,21 @@ const Chat = () => {
                 <div ref={messagesEndRef} />
             </div>
 
-            <form onSubmit={handleSend} className="p-4 bg-white border-t flex gap-2">
+            <form onSubmit={handleSend} className="p-4 bg-white border-t-4 border-black flex gap-4">
                 <input
                     type="text"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     placeholder="Type your message in Dutch..."
-                    className="flex-1 border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    className="brutal-input text-xl"
                     disabled={loading}
                 />
                 <button
                     type="submit"
                     disabled={loading || !input.trim()}
-                    className="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition disabled:bg-gray-400"
+                    className="brutal-btn bg-pink-400 text-xl disabled:bg-gray-400 disabled:opacity-50"
                 >
-                    Send
+                    SEND
                 </button>
             </form>
         </div>

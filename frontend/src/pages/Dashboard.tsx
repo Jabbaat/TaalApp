@@ -62,56 +62,58 @@ const Dashboard = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-100 p-8">
-            <div className="max-w-4xl mx-auto bg-white rounded-lg shadow-md p-6">
+        <div className="min-h-screen bg-green-400 p-8">
+            <div className="max-w-4xl mx-auto brutal-card mb-8">
                 {error && (
-                    <div className="mb-4 p-4 bg-red-100 border border-red-400 text-red-700 rounded">
+                    <div className="mb-6 brutal-border bg-red-400 text-black font-bold p-4">
                         <strong>Error:</strong> {error}
                     </div>
                 )}
-                <div className="flex justify-between items-center mb-6">
-                    <h1 className="text-3xl font-bold text-gray-800">{t('welcome')}, {user?.email}</h1>
+                <div className="flex justify-between items-center mb-8 border-b-4 border-black pb-4">
+                    <h1 className="text-4xl font-black text-black uppercase tracking-tight">{t('welcome')}, {user?.email}</h1>
                     <button
                         onClick={logout}
-                        className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
+                        className="brutal-btn bg-red-500 text-white border-2 hover:bg-red-400"
                     >
                         {t('logout')}
                     </button>
                 </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                    <div className="bg-blue-50 p-4 rounded-lg">
-                        <h3 className="text-xl font-semibold mb-2 text-blue-800">{t('your_profile')}</h3>
-                        <p><strong>{t('native_language')}:</strong> {user?.nativeLanguage}</p>
-                        <p><strong>{t('target_language')}:</strong> {user?.targetLanguage}</p>
-                        <p><strong>{t('skill_level')}:</strong> {user?.skillLevel}</p>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-10">
+                    <div className="brutal-border bg-blue-300 p-6">
+                        <h3 className="text-2xl font-black mb-4 text-black uppercase">{t('your_profile')}</h3>
+                        <div className="space-y-2 text-lg font-bold">
+                            <p className="flex justify-between border-b-2 border-black pb-1"><span>{t('native_language')}:</span> <span>{user?.nativeLanguage}</span></p>
+                            <p className="flex justify-between border-b-2 border-black pb-1"><span>{t('target_language')}:</span> <span>{user?.targetLanguage}</span></p>
+                            <p className="flex justify-between border-b-2 border-black pb-1"><span>{t('skill_level')}:</span> <span>{user?.skillLevel}</span></p>
+                        </div>
                     </div>
 
-                    <div className="bg-green-50 p-4 rounded-lg">
-                        <h3 className="text-xl font-semibold mb-2 text-green-800">{t('action_center')}</h3>
-                        <div className="flex flex-col space-y-2">
+                    <div className="brutal-border bg-yellow-300 p-6">
+                        <h3 className="text-2xl font-black mb-4 text-black uppercase">{t('action_center')}</h3>
+                        <div className="flex flex-col space-y-4">
                             <button
                                 onClick={handleGenerateLesson}
                                 disabled={loading}
-                                className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition disabled:bg-gray-400"
+                                className="brutal-btn bg-pink-400 disabled:bg-gray-400 disabled:opacity-50"
                             >
                                 {loading ? t('generating') : t('generate_lesson')}
                             </button>
                             <button
                                 onClick={() => navigate('/practice')}
-                                className="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600 transition"
+                                className="brutal-btn bg-purple-400"
                             >
                                 {t('practice_vocab')}
                             </button>
                             <button
                                 onClick={() => navigate('/pronunciation')}
-                                className="bg-purple-600 text-white px-4 py-2 rounded hover:bg-purple-700 transition"
+                                className="brutal-btn bg-cyan-400"
                             >
                                 {t('pronunciation_check')}
                             </button>
                             <button
                                 onClick={() => navigate('/chat')}
-                                className="bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition"
+                                className="brutal-btn bg-orange-400"
                             >
                                 {t('chat_tutor')}
                             </button>
@@ -119,26 +121,26 @@ const Dashboard = () => {
                     </div>
                 </div>
 
-                <div className="mb-8">
+                <div className="mb-10 brutal-border p-4 bg-white">
                     <ProgressChart />
                 </div>
 
-                <h2 className="text-2xl font-bold mb-4 text-gray-800">{t('your_lessons')}</h2>
-                <div className="space-y-4">
+                <h2 className="text-3xl font-black mb-6 text-black uppercase border-b-4 border-black pb-2">{t('your_lessons')}</h2>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     {lessons.length === 0 ? (
-                        <p className="text-gray-500">{t('no_lessons')}</p>
+                        <p className="text-black font-bold text-xl col-span-full">{t('no_lessons')}</p>
                     ) : (
                         lessons.map((lesson) => (
                             <div
                                 key={lesson.id}
                                 onClick={() => navigate(`/lessons/${lesson.id}`)}
-                                className="border p-4 rounded-lg shadow-sm hover:shadow-md transition cursor-pointer hover:bg-gray-50"
+                                className="brutal-card brutal-shadow-hover bg-lime-300 cursor-pointer"
                             >
-                                <div className="flex justify-between items-center">
-                                    <h3 className="text-lg font-bold text-indigo-700">{lesson.title}</h3>
-                                    <span className="text-xs font-semibold bg-indigo-100 text-indigo-800 px-2 py-1 rounded-full uppercase tracking-wide">{lesson.difficultyLevel}</span>
+                                <div className="flex justify-between items-start mb-4">
+                                    <h3 className="text-2xl font-black text-black leading-tight">{lesson.title}</h3>
+                                    <span className="text-sm font-bold bg-white border-2 border-black text-black px-3 py-1 uppercase">{lesson.difficultyLevel}</span>
                                 </div>
-                                <p className="text-gray-500 text-sm mt-2">Click to start lesson</p>
+                                <p className="text-black font-bold">CLICK TO START LESSON &rarr;</p>
                             </div>
                         ))
                     )}

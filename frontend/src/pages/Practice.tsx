@@ -62,30 +62,34 @@ const Practice = () => {
 
     if (reviewItems.length === 0) {
         return (
-            <div className="min-h-screen bg-gray-100 p-8 flex flex-col items-center justify-center">
-                <h2 className="text-2xl font-bold mb-4">All caught up!</h2>
-                <p className="mb-4">You have no words to review right now.</p>
-                <button
-                    onClick={() => navigate('/dashboard')}
-                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-                >
-                    Back to Dashboard
-                </button>
+            <div className="min-h-screen bg-pink-400 p-8 flex flex-col items-center justify-center">
+                <div className="brutal-card text-center p-12">
+                    <h2 className="text-4xl font-black mb-4 uppercase">All caught up!</h2>
+                    <p className="mb-8 font-bold text-xl">You have no words to review right now.</p>
+                    <button
+                        onClick={() => navigate('/dashboard')}
+                        className="brutal-btn bg-blue-400 text-xl"
+                    >
+                        BACK TO DASHBOARD
+                    </button>
+                </div>
             </div>
         );
     }
 
     if (currentIndex >= reviewItems.length) {
         return (
-            <div className="min-h-screen bg-gray-100 p-8 flex flex-col items-center justify-center">
-                <h2 className="text-2xl font-bold mb-4">Session Complete!</h2>
-                <p className="mb-4">You reviewed {reviewItems.length} words.</p>
-                <button
-                    onClick={() => navigate('/dashboard')}
-                    className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
-                >
-                    Back to Dashboard
-                </button>
+            <div className="min-h-screen bg-pink-400 p-8 flex flex-col items-center justify-center">
+                <div className="brutal-card text-center p-12">
+                    <h2 className="text-4xl font-black mb-4 uppercase">Session Complete!</h2>
+                    <p className="mb-8 font-bold text-xl">You reviewed {reviewItems.length} words.</p>
+                    <button
+                        onClick={() => navigate('/dashboard')}
+                        className="brutal-btn bg-blue-400 text-xl"
+                    >
+                        BACK TO DASHBOARD
+                    </button>
+                </div>
             </div>
         );
     }
@@ -93,31 +97,31 @@ const Practice = () => {
     const currentItem = reviewItems[currentIndex];
 
     return (
-        <div className="min-h-screen bg-gray-100 p-8 flex flex-col items-center justify-center">
-            <div className="bg-white p-12 rounded-lg shadow-lg w-full max-w-lg text-center">
-                <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-2">Translate this word</h2>
-                <h1 className="text-4xl font-bold text-gray-800 mb-8">{currentItem.word}</h1>
+        <div className="min-h-screen bg-pink-400 p-8 flex flex-col items-center justify-center">
+            <div className="brutal-card p-12 w-full max-w-lg text-center">
+                <h2 className="text-xl text-black font-black uppercase tracking-wider mb-2 border-b-4 border-black pb-2">Translate this word</h2>
+                <h1 className="text-6xl font-black text-black mb-12 mt-8 tracking-tighter uppercase">{currentItem.word}</h1>
 
                 {showTranslation ? (
                     <div>
-                        <h3 className="text-2xl text-blue-600 mb-8">{currentItem.translation}</h3>
-                        <div className="grid grid-cols-3 gap-4">
-                            <button onClick={() => handleRate(1)} className="bg-red-100 text-red-800 py-2 rounded hover:bg-red-200">Hard</button>
-                            <button onClick={() => handleRate(3)} className="bg-yellow-100 text-yellow-800 py-2 rounded hover:bg-yellow-200">Good</button>
-                            <button onClick={() => handleRate(5)} className="bg-green-100 text-green-800 py-2 rounded hover:bg-green-200">Easy</button>
+                        <h3 className="text-4xl font-black text-black mb-8 p-4 bg-yellow-300 brutal-border uppercase">{currentItem.translation}</h3>
+                        <div className="grid grid-cols-3 gap-6">
+                            <button onClick={() => handleRate(1)} className="brutal-btn bg-red-400 py-4 text-xl">HARD</button>
+                            <button onClick={() => handleRate(3)} className="brutal-btn bg-yellow-400 py-4 text-xl">GOOD</button>
+                            <button onClick={() => handleRate(5)} className="brutal-btn bg-green-400 py-4 text-xl">EASY</button>
                         </div>
                     </div>
                 ) : (
                     <button
                         onClick={() => setShowTranslation(true)}
-                        className="bg-blue-600 text-white px-8 py-3 rounded-lg hover:bg-blue-700 transition font-semibold"
+                        className="brutal-btn bg-blue-400 text-2xl px-10 py-4 w-full"
                     >
-                        Show Answer
+                        SHOW ANSWER
                     </button>
                 )}
             </div>
-            <div className="mt-8 text-gray-500">
-                Card {currentIndex + 1} of {reviewItems.length}
+            <div className="mt-8 text-black font-black text-xl bg-white brutal-border px-4 py-2">
+                CARD {currentIndex + 1} OF {reviewItems.length}
             </div>
         </div>
     );

@@ -44,68 +44,72 @@ const Register = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100">
-            <div className="bg-white p-8 rounded-lg shadow-md w-96">
-                <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">Register</h2>
-                {error && <p className="text-red-500 mb-4">{error}</p>}
+        <div className="min-h-screen flex items-center justify-center bg-pink-400 p-4">
+            <div className="w-full max-w-md brutal-card">
+                <h2 className="text-3xl font-black mb-6 text-center text-black uppercase tracking-wider">Register</h2>
+                {error && <div className="brutal-border bg-red-400 text-black font-bold p-3 mb-4">{error}</div>}
                 <form onSubmit={handleSubmit}>
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2">Email</label>
+                        <label className="block text-black font-bold mb-2 uppercase text-sm">Email</label>
                         <input
                             type="email"
                             name="email"
                             value={formData.email}
                             onChange={handleChange}
-                            className="w-full px-3 py-2 border rounded-lg"
+                            className="brutal-input"
                             required
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2">Password</label>
+                        <label className="block text-black font-bold mb-2 uppercase text-sm">Password</label>
                         <input
                             type="password"
                             name="password"
                             value={formData.password}
                             onChange={handleChange}
-                            className="w-full px-3 py-2 border rounded-lg"
+                            className="brutal-input"
                             required
                         />
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2">Native Language</label>
+                        <label className="block text-black font-bold mb-2 uppercase text-sm">Native Language</label>
                         <select
                             name="nativeLanguage"
                             value={formData.nativeLanguage}
                             onChange={handleChange}
-                            className="w-full px-3 py-2 border rounded-lg"
+                            className="brutal-input"
                         >
                             <option value="en">English</option>
                             <option value="nl">Dutch</option>
                             <option value="es">Spanish</option>
                             <option value="sv">Swedish</option>
+                            <option value="fr">French</option>
+                            <option value="it">Italian</option>
                         </select>
                     </div>
                     <div className="mb-4">
-                        <label className="block text-gray-700 text-sm font-bold mb-2">Target Language</label>
+                        <label className="block text-black font-bold mb-2 uppercase text-sm">Target Language</label>
                         <select
                             name="targetLanguage"
                             value={formData.targetLanguage}
                             onChange={handleChange}
-                            className="w-full px-3 py-2 border rounded-lg"
+                            className="brutal-input"
                         >
                             <option value="nl">Dutch</option>
                             <option value="en">English</option>
                             <option value="es">Spanish</option>
                             <option value="sv">Swedish</option>
+                            <option value="fr">French</option>
+                            <option value="it">Italian</option>
                         </select>
                     </div>
                     <div className="mb-6">
-                        <label className="block text-gray-700 text-sm font-bold mb-2">Skill Level</label>
+                        <label className="block text-black font-bold mb-2 uppercase text-sm">Skill Level</label>
                         <select
                             name="skillLevel"
                             value={formData.skillLevel}
                             onChange={handleChange}
-                            className="w-full px-3 py-2 border rounded-lg"
+                            className="brutal-input"
                         >
                             <option value="beginner">Beginner</option>
                             <option value="intermediate">Intermediate</option>
@@ -114,13 +118,13 @@ const Register = () => {
                     </div>
                     <button
                         type="submit"
-                        className="w-full bg-green-600 text-white py-2 rounded-lg hover:bg-green-700 transition duration-200"
+                        className="brutal-btn w-full text-xl mt-4"
                     >
-                        Create Account
+                        CREATE ACCOUNT
                     </button>
                 </form>
-                <p className="mt-4 text-center text-gray-600">
-                    Already have an account? <Link to="/login" className="text-blue-600 hover:underline">Login</Link>
+                <p className="mt-6 text-center text-black font-bold">
+                    Already have an account? <Link to="/login" className="text-blue-700 hover:text-blue-900 underline decoration-4 underline-offset-4">Login</Link>
                 </p>
             </div>
         </div>

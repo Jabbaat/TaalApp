@@ -106,51 +106,51 @@ const Pronunciation = () => {
     };
 
     return (
-        <div className="min-h-screen bg-gray-100 p-8 flex flex-col items-center justify-center">
-            <div className="bg-white p-12 rounded-lg shadow-lg w-full max-w-lg text-center">
-                <h2 className="text-sm text-gray-500 uppercase tracking-wide mb-2">Speak this phrase</h2>
-                <h1 className="text-3xl font-bold text-gray-800 mb-8">{targetPhrase}</h1>
+        <div className="min-h-screen bg-cyan-400 p-8 flex flex-col items-center justify-center">
+            <div className="brutal-card p-12 w-full max-w-lg text-center">
+                <h2 className="text-xl text-black font-black uppercase tracking-wider mb-2 border-b-4 border-black pb-2">Speak this phrase</h2>
+                <h1 className="text-5xl font-black text-black mb-12 mt-8 tracking-tighter uppercase">{targetPhrase}</h1>
 
-                <div className="mb-8">
+                <div className="mb-10 flex flex-col items-center">
                     <button
                         onClick={startRecording}
                         disabled={isRecording}
-                        className={`w-20 h-20 rounded-full flex items-center justify-center transition ${isRecording ? 'bg-red-500 animate-pulse' : 'bg-blue-600 hover:bg-blue-700'}`}
+                        className={`w-32 h-32 brutal-border brutal-shadow brutal-shadow-hover flex items-center justify-center transition active:shadow-none active:translate-x-[6px] active:translate-y-[6px] ${isRecording ? 'bg-red-500 animate-pulse outline outline-8 outline-red-300' : 'bg-yellow-400 hover:bg-yellow-300'}`}
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 text-black" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 01-3-3V5a3 3 0 116 0v6a3 3 0 01-3 3z" />
                         </svg>
                     </button>
-                    <p className="mt-4 text-gray-600 h-6">{feedback}</p>
+                    <p className="mt-6 text-black font-black text-xl h-8 uppercase bg-white px-4 py-1 brutal-border inline-block">{feedback || 'READY'}</p>
                 </div>
 
                 {spokenText && (
-                    <div className={`p-4 rounded-lg mb-6 ${accuracy && accuracy > 80 ? 'bg-green-100' : 'bg-gray-100'}`}>
-                        <p className="text-sm text-gray-500 mb-1">You said:</p>
-                        <p className="text-lg font-medium text-gray-800">"{spokenText}"</p>
+                    <div className={`p-6 brutal-border mb-8 ${accuracy && accuracy > 80 ? 'bg-green-400' : 'bg-white'}`}>
+                        <p className="text-xl font-black uppercase mb-2 border-b-2 border-black">You said:</p>
+                        <p className="text-3xl font-black text-black">"{spokenText}"</p>
                         {accuracy !== null && (
-                            <div className="mt-2">
-                                <span className={`text-2xl font-bold ${accuracy > 80 ? 'text-green-600' : accuracy > 60 ? 'text-yellow-600' : 'text-red-600'}`}>
+                            <div className="mt-4 flex justify-center items-center">
+                                <span className="text-5xl font-black text-black">
                                     {accuracy}%
                                 </span>
-                                <span className="text-sm text-gray-500 ml-2">Accuracy</span>
+                                <span className="text-2xl font-black text-black ml-4 uppercase">Accuracy</span>
                             </div>
                         )}
                     </div>
                 )}
 
-                <div className="flex justify-between mt-8">
+                <div className="flex justify-between items-center mt-8 pt-6 border-t-4 border-black">
                     <button
                         onClick={() => navigate('/dashboard')}
-                        className="text-gray-600 hover:text-gray-900"
+                        className="brutal-btn bg-white py-2 px-4 shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] active:shadow-none"
                     >
-                        Back to Dashboard
+                        BACK
                     </button>
                     <button
                         onClick={nextPhrase}
-                        className="bg-gray-800 text-white px-6 py-2 rounded hover:bg-gray-900 transition"
+                        className="brutal-btn bg-pink-400"
                     >
-                        Next Phrase
+                        NEXT PHRASE
                     </button>
                 </div>
             </div>

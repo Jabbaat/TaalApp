@@ -1,1 +1,63 @@
 @import "tailwindcss";
+
+@layer utilities {
+  .brutal-border {
+    border: 4px solid #000;
+    border-radius: 0;
+  }
+
+  .brutal-shadow {
+    box-shadow: 6px 6px 0px 0px #000;
+  }
+
+  .brutal-shadow-hover {
+    transition: all 150ms ease;
+  }
+
+  .brutal-shadow-hover:hover {
+    box-shadow: 2px 2px 0px 0px #000;
+    transform: translate(4px, 4px);
+  }
+
+  .brutal-btn {
+    border: 4px solid #000;
+    border-radius: 0;
+    box-shadow: 6px 6px 0px 0px #000;
+    transition: all 150ms ease;
+    font-weight: 700;
+    padding: 0.75rem 1.5rem;
+    color: #000;
+  }
+
+  .brutal-btn:hover {
+    box-shadow: 2px 2px 0px 0px #000;
+    transform: translate(4px, 4px);
+  }
+
+  .brutal-btn:active {
+    box-shadow: none;
+    transform: translate(6px, 6px);
+  }
+
+  .brutal-card {
+    border: 4px solid #000;
+    border-radius: 0;
+    box-shadow: 6px 6px 0px 0px #000;
+    background-color: #fff;
+    padding: 1.5rem;
+  }
+
+  .brutal-input {
+    border: 4px solid #000;
+    border-radius: 0;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: #fff;
+    transition: background-color 150ms ease;
+  }
+
+  .brutal-input:focus {
+    outline: none;
+    --tw-ring-color: transparent;
+  }
+}

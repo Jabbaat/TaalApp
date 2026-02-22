@@ -57,6 +57,42 @@ const resources = {
             "no_lessons": "Inga lektioner genererade ännu. Klicka på \"Generera Ny Lektion\" för att börja!",
             "generating": "Genererar..."
         }
+    },
+    fr: {
+        translation: {
+            "welcome": "Bienvenue",
+            "logout": "Déconnexion",
+            "your_profile": "Votre Profil",
+            "native_language": "Langue Maternelle",
+            "target_language": "Langue Cible",
+            "skill_level": "Niveau de Compétence",
+            "action_center": "Centre d'Action",
+            "generate_lesson": "Générer une Nouvelle Leçon",
+            "practice_vocab": "Pratiquer le Vocabulaire",
+            "pronunciation_check": "Vérification de la Prononciation",
+            "chat_tutor": "Discuter avec le Tuteur IA",
+            "your_lessons": "Vos Leçons",
+            "no_lessons": "Aucune leçon générée pour le moment. Cliquez sur \"Générer une Nouvelle Leçon\" pour commencer !",
+            "generating": "Génération..."
+        }
+    },
+    it: {
+        translation: {
+            "welcome": "Benvenuto",
+            "logout": "Disconnessione",
+            "your_profile": "Il Tuo Profilo",
+            "native_language": "Madrelingua",
+            "target_language": "Lingua di Destinazione",
+            "skill_level": "Livello di Competenza",
+            "action_center": "Centro Azioni",
+            "generate_lesson": "Genera Nuova Lezione",
+            "practice_vocab": "Pratica Vocabolario",
+            "pronunciation_check": "Controllo Pronuncia",
+            "chat_tutor": "Chatta con il Tutor IA",
+            "your_lessons": "Le Tue Lezioni",
+            "no_lessons": "Nessuna lezione generata ancora. Clicca su \"Genera Nuova Lezione\" per iniziare!",
+            "generating": "Generazione..."
+        }
     }
 };
 
