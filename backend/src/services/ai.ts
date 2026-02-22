@@ -41,12 +41,24 @@ export const generateLessonService = async (targetLanguage: string, skillLevel: 
 
   try {
     const genAI = new GoogleGenerativeAI(process.env.GOOGLE_API_KEY);
-    const model = genAI.getGenerativeModel({ model: MODEL_NAME });
+    const model = genAI.getGenerativeModel({
+      model: MODEL_NAME,
+      generationConfig: { temperature: 0.9 }
+    });
+
+    const themes = [
+      "at the airport", "ordering food in a restaurant", "hobbies and free time",
+      "talking about work", "asking for directions", "shopping for clothes",
+      "going to the doctor", "planning a vacation", "daily routine",
+      "talking about the weather", "meeting new people", "using public transport"
+    ];
+    const randomTheme = themes[Math.floor(Math.random() * themes.length)];
 
     const prompt = `
         You are a helpful language tutor API that outputs only valid JSON.
-        Generate a language lesson for a ${skillLevel} student learning ${targetLanguage}.
-        The lesson should focus on a specific useful topic suitable for this level.
+        Generate a completely unique and random language lesson for a ${skillLevel} student learning ${targetLanguage}.
+        The lesson MUST explicitly focus on the following theme: "${randomTheme}".
+        Ensure that the vocabulary and sentences are highly relevant to this specific theme.
         
         Return ONLY valid JSON (no markdown formatting, no backticks) with the following structure:
         {

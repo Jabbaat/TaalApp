@@ -90,17 +90,25 @@ const LessonRunner: React.FC = () => {
 
             const setVoiceAndSpeak = () => {
                 const voices = window.speechSynthesis.getVoices();
-                // Find a voice that matches the langCode exactly, or at least the base language 
-                const voice = voices.find(v => v.lang === langCode) || voices.find(v => v.lang.startsWith(langCode.split('-')[0]));
-                if (voice) {
-                    utterance.voice = voice;
+                // Find a voice matching exact lang code or language prefix
+                const prefix = langCode.split('-')[0].toLowerCase();
+                const matchedVoice = voices.find(v => v.lang.toLowerCase() === langCode.toLowerCase().replace('_', '-'))
+                    || voices.find(v => v.lang.toLowerCase().includes(langCode.toLowerCase()))
+                    || voices.find(v => v.lang.toLowerCase().startsWith(prefix));
+
+                if (matchedVoice) {
+                    utterance.voice = matchedVoice;
                 }
                 window.speechSynthesis.speak(utterance);
             };
 
             // Voices might not be loaded immediately, add listener if empty
             if (window.speechSynthesis.getVoices().length === 0) {
-                window.speechSynthesis.addEventListener('voiceschanged', setVoiceAndSpeak, { once: true });
+                const handleVoicesChanged = () => {
+                    setVoiceAndSpeak();
+                    window.speechSynthesis.removeEventListener('voiceschanged', handleVoicesChanged);
+                };
+                window.speechSynthesis.addEventListener('voiceschanged', handleVoicesChanged);
             } else {
                 setVoiceAndSpeak();
             }

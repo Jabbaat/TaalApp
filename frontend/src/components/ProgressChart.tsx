@@ -10,20 +10,34 @@ import {
     ResponsiveContainer,
 } from 'recharts';
 
-const data = [
-    { day: 'Mon', words: 0 },
-    { day: 'Tue', words: 5 },
-    { day: 'Wed', words: 12 },
-    { day: 'Thu', words: 18 },
-    { day: 'Fri', words: 25 },
-    { day: 'Sat', words: 30 },
-    { day: 'Sun', words: 45 },
-];
+const ProgressChart = ({ lessons }: { lessons: any[] }) => {
+    // Process real lesson data into a daily count for the past 7 days
+    const processData = () => {
+        const last7Days = Array.from({ length: 7 }, (_, i) => {
+            const d = new Date();
+            d.setDate(d.getDate() - (6 - i));
+            return d;
+        });
 
-const ProgressChart = () => {
+        return last7Days.map(date => {
+            const dayStr = date.toLocaleDateString('en-US', { weekday: 'short' });
+            const count = lessons.filter(l => {
+                if (!l.createdAt) return false;
+                const lDate = new Date(l.createdAt);
+                return lDate.getDate() === date.getDate() &&
+                    lDate.getMonth() === date.getMonth() &&
+                    lDate.getFullYear() === date.getFullYear();
+            }).length;
+
+            return { day: dayStr, lessons: count };
+        });
+    };
+
+    const data = processData();
+
     return (
         <div className="bg-white p-4 rounded-lg shadow-sm">
-            <h3 className="text-lg font-bold mb-4 text-gray-700">Learning Progress (This Week)</h3>
+            <h3 className="text-lg font-bold mb-4 text-gray-700">Generated Lessons (Last 7 Days)</h3>
             <div className="h-64">
                 <ResponsiveContainer width="100%" height="100%">
                     <LineChart
@@ -40,7 +54,7 @@ const ProgressChart = () => {
                         <YAxis />
                         <Tooltip />
                         <Legend />
-                        <Line type="monotone" dataKey="words" stroke="#8884d8" activeDot={{ r: 8 }} name="Words Learned" />
+                        <Line type="monotone" dataKey="lessons" stroke="#8884d8" activeDot={{ r: 8 }} name="Lessons Generated" />
                     </LineChart>
                 </ResponsiveContainer>
             </div>

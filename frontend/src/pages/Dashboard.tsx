@@ -10,6 +10,7 @@ interface Lesson {
     title: string;
     content: string;
     difficultyLevel: string;
+    createdAt: string;
 }
 
 const Dashboard = () => {
@@ -122,7 +123,7 @@ const Dashboard = () => {
                 </div>
 
                 <div className="mb-10 brutal-border p-4 bg-white">
-                    <ProgressChart />
+                    <ProgressChart lessons={lessons} />
                 </div>
 
                 <h2 className="text-3xl font-black mb-6 text-black uppercase border-b-4 border-black pb-2">{t('your_lessons')}</h2>
